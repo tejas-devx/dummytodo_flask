@@ -1,0 +1,41 @@
+# Ignore virtual environment
+venv/
+ENV/
+env/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# VS Code settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# macOS system files
+.DS_Store
+
+# Flask sqlite or json data files (optional)
+*.db
+*.sqlite3
+
+# Ignore environment variables
+.env
+
+# Compiled files
+*.log
+
+# Byte-compiled
+*.pyo
+*.pyd
+
+# Backup files
+*.bak
+*.swp
+
+# Ignore tasks.json? (optional)
+# Uncomment if you DON’T want data stored in Git
+# tasks.json
