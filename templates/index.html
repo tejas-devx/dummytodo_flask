@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Techy To-Do App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="title">⚡ Techy To-Do List</h1>
+
+        <!-- ADD TASK FORM -->
+        <form class="todo-form" action="/add" method="POST">
+            <input type="text" name="title" placeholder="Task title..." required>
+            <input type="text" name="description" placeholder="Task description...">
+            <button type="submit">Add Task</button>
+        </form>
+
+        <!-- DISPLAY TASKS -->
+        <ul class="todo-list">
+            {% for task in tasks %}
+            <li class="todo-item">
+                <span>
+                    <strong>{{ task.title }}</strong><br>
+                    <small>{{ task.description }}</small><br>
+                    <small>Status: {{ task.status }}</small>
+                </span>
+                <span>
+                    <a class="delete-btn" href="/delete/{{ task.id }}">✖</a>
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</body>
+</html>
