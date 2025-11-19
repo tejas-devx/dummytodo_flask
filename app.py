@@ -6,26 +6,30 @@ app = Flask(__name__)
 
 DATA_FILE = "tasks.json"
 
-# Load tasks from JSON file
+
 def load_tasks():
     if not os.path.exists(DATA_FILE):
         with open(DATA_FILE, "w") as f:
             json.dump([], f)
-    with open(DATA_FILE, "r") as f:
-        return json.load(f)
 
-# Save tasks to JSON file
+    with open(DATA_FILE, "r") as f:
+        try:
+            return json.load(f)
+        except json.JSONDecodeError:
+            return []
+
+
 def save_tasks(tasks):
     with open(DATA_FILE, "w") as f:
         json.dump(tasks, f, indent=4)
 
-# Home route
+
 @app.route('/')
 def index():
     tasks = load_tasks()
     return render_template("index.html", tasks=tasks)
 
-# Add a task
+
 @app.route('/add', methods=['POST'])
 def add():
     tasks = load_tasks()
@@ -39,11 +43,14 @@ def add():
     save_tasks(tasks)
     return redirect(url_for('index'))
 
-# Edit task
+
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit(id):
     tasks = load_tasks()
     task = next((t for t in tasks if t["id"] == id), None)
+
+    if task is None:
+        return redirect(url_for("index"))
 
     if request.method == 'POST':
         task["title"] = request.form["title"]
@@ -54,19 +61,17 @@ def edit(id):
 
     return render_template("edit.html", task=task)
 
-# Delete task
+
 @app.route('/delete/<int:id>')
 def delete(id):
     tasks = load_tasks()
     tasks = [t for t in tasks if t["id"] != id]
 
-    # Reassign IDs to prevent gaps
     for i, t in enumerate(tasks, start=1):
         t["id"] = i
 
     save_tasks(tasks)
     return redirect(url_for('index'))
-
 
 if __name__ == "__main__":
     app.run(debug=True)

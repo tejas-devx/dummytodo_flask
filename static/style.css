@@ -27,7 +27,7 @@ body {
     text-shadow: 0 0 8px #4ac1ff;
 }
 
-/* Updated To-Do Form */
+/* To-Do Form */
 .todo-form {
     display: flex;
     flex-direction: column;
@@ -35,8 +35,8 @@ body {
     gap: 15px;
 }
 
-/* Input box */
-.todo-form input {
+.todo-form input,
+.todo-form select {
     width: 100%;
     padding: 12px;
     border: none;
@@ -48,7 +48,6 @@ body {
     box-shadow: 0 0 10px rgba(74, 193, 255, 0.3);
 }
 
-/* Add button centered */
 .todo-form button {
     width: 40%;
     padding: 12px;
@@ -83,16 +82,60 @@ body {
     box-shadow: 0 0 8px rgba(74, 193, 255, 0.3);
 }
 
-/* Delete button */
+.task-info small {
+    opacity: 0.8;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin-top: 5px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.status-badge.pending {
+    background: #ffcc00;
+    color: #000;
+}
+
+.status-badge.progress {
+    background: #4ac1ff;
+    color: #000;
+}
+
+.status-badge.completed {
+    background: #4eff81;
+    color: #000;
+}
+
+/* Buttons */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.edit-btn {
+    color: #4ac1ff;
+    font-size: 1.2rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.edit-btn:hover {
+    color: #7cd9ff;
+}
+
 .delete-btn {
     color: #ff4f70;
     text-decoration: none;
     font-size: 1.2rem;
     font-weight: bold;
-    transition: 0.2s;
 }
 
 .delete-btn:hover {
     color: #ff99a7;
-    text-shadow: 0 0 10px #ff4f70;
 }

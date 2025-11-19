@@ -9,7 +9,7 @@
 <body>
 
     <div class="container">
-        <h1 class="title">⚡ Techy To-Do List</h1>
+        <h1 class="title">To-Do List</h1>
 
         <!-- ADD TASK FORM -->
         <form class="todo-form" action="/add" method="POST">
@@ -22,14 +22,23 @@
         <ul class="todo-list">
             {% for task in tasks %}
             <li class="todo-item">
-                <span>
+
+                <div class="task-info">
                     <strong>{{ task.title }}</strong><br>
                     <small>{{ task.description }}</small><br>
-                    <small>Status: {{ task.status }}</small>
-                </span>
-                <span>
+                    <span class="status-badge 
+                        {% if task.status == 'Completed' %}completed
+                        {% elif task.status == 'In Progress' %}progress
+                        {% else %}pending{% endif %}">
+                        {{ task.status }}
+                    </span>
+                </div>
+
+                <div class="actions">
+                    <a class="edit-btn" href="/edit/{{ task.id }}">✏</a>
                     <a class="delete-btn" href="/delete/{{ task.id }}">✖</a>
-                </span>
+                </div>
+
             </li>
             {% endfor %}
         </ul>
